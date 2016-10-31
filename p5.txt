@@ -39,10 +39,10 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 
 
 6. A continuación, hay más de una docena de tramas TCP/HTTP.
- ** ¿Podrías decir la URL que se está pidiendo?
- ** ¿Qué user agent (UA) la está pidiendo?
- ** ¿Qué devuelve el servidor?
- ** Si lanzamos el navegador web, por ejemplo, Mozilla Firefox, y vamos a la misma URL, ¿qué recibimos? ¿Qué es, entonces, lo que está respondiendo el servidor?
+ ** ¿Podrías decir la URL que se está pidiendo? http://ekiga.net/ip/
+ ** ¿Qué user agent (UA) la está pidiendo? Ekiga
+ ** ¿Qué devuelve el servidor? El texto con la IP de como ve al cliente.
+ ** Si lanzamos el navegador web, por ejemplo, Mozilla Firefox, y vamos a la misma URL, ¿qué recibimos? ¿Qué es, entonces, lo que está respondiendo el servidor? Mi IP de cliente en este caso pública puesto que los ordenadores de la universidad la tienen así. En mi caso es 212.128.254.138 puedo comprobarlo mediante el comando ifconfig en el terminal y en el apartado enp5s0 puedo ver la inet: 212.128.254.138
 
 
 7. Hasta la trama 45 se puede observar una secuencia de tramas del protocolo STUN.
