@@ -108,15 +108,24 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
  
  ** ¿Cuánto es el valor del tiempo de expiración de la sesión? Indica las unidades.
     3600 segundos
+    
+    
 
 10. Una vez registrados, podemos efectuar una llamada. Vamos a probar con el servicio de eco de Ekiga que nos permite comprobar si nos hemos conectado correctamente. El servicio de eco tiene la dirección sip:500@ekiga.net. Veamos el INVITE de cerca.
  ** ¿Puede verse el nombre del que efectúa la llamada, así como su dirección SIP?
- 
+    Observamos el paquete numero 84 el cual corresponde al INVITE y nos percatamos de como aparecen dichos datos. En Session initiation Protocol-> Message Header -> From -> "Gregorio Robles" <sip_grex@ekiga.net>
+    
+    
  ** ¿Qué es lo que contiene el cuerpo de la trama? ¿En qué formato/protocolo está?
+    La descripcion de la sesión SDP la cual contiene las siguientes cabeceras: Owner/Creator, Connection Infotmation(c), Time Description, active time(t), Media Attribute(a), Media Description.
+    El protocolo o formato utilizado es SDP.
  
  ** ¿Tiene éxito el primer intento? ¿Cómo lo sabes?
+    No, debido a que la respuesta del servidor es 407 Proxy Authentication Required, es decir le falta dicha cabecera. 
+ 
  
  ** ¿En qué se diferencia el segundo INVITE más abajo del primero? ¿A qué crees que se debe esto?
+    El segundo invite tiene la cabecera Proxy-Authentication requisito que debe cumplirse para que se mande de manera adecuada
 
 
 11. Una vez conectado, estudia el intercambio de tramas.
