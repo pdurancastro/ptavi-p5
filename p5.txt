@@ -11,20 +11,32 @@ Análisis de una sesión SIP
 
 Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wireshark2. Se pide rellenar las cuestiones que se plantean en este guión en el fichero p5.txt que encontrarás también en el repositorio.
 
+
 2. Observa que las tramas capturadas corresponden a una sesión SIP con Ekiga, un cliente de VoIP para GNOME. Responde a las siguientes cuestiones:
- ** ¿Cuántos paquetes componen la captura? 954
- ** ¿Cuánto tiempo dura la captura? 56.149345 segundos
+ ** ¿Cuántos paquetes componen la captura? 
+    954
+
+ ** ¿Cuánto tiempo dura la captura? 
+    56.149345 segundos
+
  ** ¿Qué IP tiene la máquina donde se ha efectuado la captura? ¿Se trata de una IP pública o de una IP privada? ¿Por qué lo sabes? 192.168.1.34. Privada. Porque su rango de IP pertenece a la clase privada de IPv4 de los bloques de 16 bits la cual abarca desde 192.168.0.0-192.168.255.255
 
 
+
 3. Antes de analizar las tramas, mira las estadísticas generales que aparecen en el menú de Statistics. En el apartado de jerarquía de protocolos (Protocol Hierarchy) se puede ver el porcentaje del tráfico correspondiente al protocolo TCP y UDP.
- ** ¿Cuál de los dos es mayor? ¿Es esto consistente con una aplicación que transmite en tiempo real? UDP-96.2%, TCP 2.1%, por lo tanto es mayor UDP. Si tiene sentido porque cuando quiero transmitir a tiempo real es mas importante la velocidad que la calidad por eso utilizo UDP
- ** ¿Qué otros protocolos podemos ver en la jerarquía de protocolos? ARP, CLASSIC-STUN, DNS, H.261, HTTP, ICMP, RTCP, RTP, SIP, SIP/SDP
+ ** ¿Cuál de los dos es mayor? ¿Es esto consistente con una aplicación que transmite en tiempo real? 
+    UDP-96.2%, TCP 2.1%, por lo tanto es mayor UDP. Si tiene sentido porque cuando quiero transmitir a tiempo real es mas importante la velocidad que la calidad por eso utilizo UDP
+    
+ ** ¿Qué otros protocolos podemos ver en la jerarquía de protocolos? 
+    ARP, CLASSIC-STUN, DNS, H.261, HTTP, ICMP, RTCP, RTP, SIP, SIP/SDP
 
 
 4. Observa por encima el flujo de tramas en el menú de Statistics en IO Graphs. La captura que estamos viendo incluye desde la inicialización (registro) de la aplicación hasta su finalización, con una llamada entremedias.
- ** Filtra por sip para conocer cuándo se envían paquetes SIP. ¿En qué segundos tienen lugar esos envíos? En t=7, t=14, t=16, t=37-40, t=55
- ** Y los paquetes con RTP, ¿cuándo se envían? En t=18, t=22, t=25, t=29, t=33, t=35-36
+ ** Filtra por sip para conocer cuándo se envían paquetes SIP. ¿En qué segundos tienen lugar esos envíos? 
+    En t=7, t=14, t=16, t=37-40, t=55
+    
+ ** Y los paquetes con RTP, ¿cuándo se envían? 
+    En t=18, t=22, t=25, t=29, t=33, t=35-36
     Para el apartado anterior me fijo en los picos de las gráficas y estos me dan dichos tiempos
 
 
@@ -32,22 +44,39 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 [Al terminar el ejercicio es recomendable hacer commit de los ficheros modificados]
 
 5. Analiza las primeras cuatro tramas de la captura nada más arrancar Ekiga.
- ** ¿Qué servicio es el utilizado en estas tramas? DNS
- ** ¿Cuál es la dirección IP del servidor de nombres del ordenador que ha lanzado Ekiga? 80.58.61.250 Es el servidor al que le estoy haciendo la petición de DNS por eso se llama servidor de nombres
- ** ¿Qué dirección IP (de ekiga.net) devuelve el servicio de nombres? 86.64.162.35
- ** ¿Por qué se pide también para 35.162.64.86.in-addr.arpa? Para tener la localización de Ekiga en caso de que la IP se cambie hago la petición para tener su localización constante
+ ** ¿Qué servicio es el utilizado en estas tramas? 
+    DNS
+    
+ ** ¿Cuál es la dirección IP del servidor de nombres del ordenador que ha lanzado Ekiga? 
+    80.58.61.250 Es el servidor al que le estoy haciendo la petición de DNS por eso se llama servidor de nombres
+    
+ ** ¿Qué dirección IP (de ekiga.net) devuelve el servicio de nombres? 
+    86.64.162.35
+    
+ ** ¿Por qué se pide también para 35.162.64.86.in-addr.arpa? 
+    Para tener la localización de Ekiga en caso de que la IP se cambie hago la petición para tener su localización constante
 
 
 6. A continuación, hay más de una docena de tramas TCP/HTTP.
- ** ¿Podrías decir la URL que se está pidiendo? http://ekiga.net/ip/
- ** ¿Qué user agent (UA) la está pidiendo? Ekiga
- ** ¿Qué devuelve el servidor? El texto con la IP de como ve al cliente.
- ** Si lanzamos el navegador web, por ejemplo, Mozilla Firefox, y vamos a la misma URL, ¿qué recibimos? ¿Qué es, entonces, lo que está respondiendo el servidor? Mi IP de cliente en este caso pública puesto que los ordenadores de la universidad la tienen así. En mi caso es 212.128.254.138 puedo comprobarlo mediante el comando ifconfig en el terminal y en el apartado enp5s0 puedo ver la inet: 212.128.254.138
+ ** ¿Podrías decir la URL que se está pidiendo? 
+    http://ekiga.net/ip/
+    
+ ** ¿Qué user agent (UA) la está pidiendo? 
+    Ekiga
+    
+ ** ¿Qué devuelve el servidor? 
+    El texto con la IP de como ve al cliente.
+    
+ ** Si lanzamos el navegador web, por ejemplo, Mozilla Firefox, y vamos a la misma URL, ¿qué recibimos? ¿Qué es, entonces, lo que está respondiendo el servidor? 
+    Mi IP de cliente en este caso pública puesto que los ordenadores de la universidad la tienen así. En mi caso es 212.128.254.138 puedo comprobarlo mediante el comando ifconfig en el terminal y en el apartado enp5s0 puedo ver la inet: 212.128.254.138
 
 
 7. Hasta la trama 45 se puede observar una secuencia de tramas del protocolo STUN.
- ** ¿Por qué crees que se hace uso de este protocolo en esta captura? Busca en la Wikipedia. El protocolo STUN permite a clientes NAT encontrar su dirección IP pública, el tipo de NAT en el que se encuentra y el puerto asociado con el puerto local a través del NAT. Nuestro cliente quiere información del NAT y por ello utiliza este protocolo.
- ** ¿Estamos tras un NAT? La dirección IP 194.39.182.241 si es un NAT
+ ** ¿Por qué crees que se hace uso de este protocolo en esta captura? Busca en la Wikipedia. 
+    El protocolo STUN permite a clientes NAT encontrar su dirección IP pública, el tipo de NAT en el que se encuentra y el puerto asociado con el puerto local a través del NAT. Nuestro cliente quiere información del NAT y por ello utiliza este protocolo.
+    
+ ** ¿Estamos tras un NAT? 
+    La dirección IP 194.39.182.241 si es un NAT
 
 
 8. La trama 46 es la primera trama SIP. En un entorno como el de Internet, lo habitual es desconocer la dirección IP de la otra parte al realizar una llamada. Por eso, todo usuario registra su localización en un servidor Registrar. El Registrar guarda información sobre los usuarios en un servidor de localización que puede ser utilizado para localizar usuarios.
