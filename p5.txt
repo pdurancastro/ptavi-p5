@@ -137,7 +137,7 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
  ** ¿Qué protocolo(s) se utiliza(n)? ¿Para qué sirven estos protocolos?
     RTP,H.261
     RTP es un protocolo que se encarga de la transmision de información en tiempo real.
-    H.261 es un protocolo que sirve para manejar paquetes que contengan archivos como imágenes.
+    H.261 es un protocolo que sirve para manejar paquetes que contengan archivos como vídeos.
  
  ** ¿Cuál es el tamaño de paquete de los mismos?
     RTP = 214 bytes
@@ -179,14 +179,27 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 
 15. Identifica la trama donde se finaliza la conversación.
  ** ¿Qué método SIP se utiliza?
+    BYE
+ 
  ** ¿En qué trama(s)?
+    924,925,927 y 933
+       
  ** ¿Por qué crees que se envía varias veces?
-
+    Porque no recibe el 200 OK del servidor hasta un tiempo después y el cliente quiere cerrar la sesión.
+ 
+ 
 
 16. Finalmente, se cierra la aplicación de VozIP.
  ** ¿Por qué aparece una instrucción SIP del tipo REGISTER?
+    Aparece una instrucción pero con la cabecera Expires: 0 para que el servidor dé de baja al cliente.
+ 
+ 
  ** ¿En qué trama sucede esto?
+    Tanto en la 950 como en la 952 solo que a la primera trama le falta la cabecera Authorization y por ello se aplicará en la segunda
+ 
  ** ¿En qué se diferencia con la instrucción que se utilizó con anterioridad (al principio de la sesión)?
+    Como bien dije anteriormente al inicio de sesión el primer REGISTER tiene una cabecera Expires es de valor 3600 y en la última de valor 0
+ 
 
 
 
