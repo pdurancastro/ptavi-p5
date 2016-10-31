@@ -32,10 +32,10 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 [Al terminar el ejercicio es recomendable hacer commit de los ficheros modificados]
 
 5. Analiza las primeras cuatro tramas de la captura nada más arrancar Ekiga.
- ** ¿Qué servicio es el utilizado en estas tramas?
- ** ¿Cuál es la dirección IP del servidor de nombres del ordenador que ha lanzado Ekiga?
- ** ¿Qué dirección IP (de ekiga.net) devuelve el servicio de nombres?
- ** ¿Por qué se pide también para 35.162.64.86.in-addr.arpa?
+ ** ¿Qué servicio es el utilizado en estas tramas? DNS
+ ** ¿Cuál es la dirección IP del servidor de nombres del ordenador que ha lanzado Ekiga? 80.58.61.250 Es el servidor al que le estoy haciendo la petición de DNS por eso se llama servidor de nombres
+ ** ¿Qué dirección IP (de ekiga.net) devuelve el servicio de nombres? 86.64.162.35
+ ** ¿Por qué se pide también para 35.162.64.86.in-addr.arpa? Para tener la localización de Ekiga en caso de que la IP se cambie hago la petición para tener su localización constante
 
 
 6. A continuación, hay más de una docena de tramas TCP/HTTP.
