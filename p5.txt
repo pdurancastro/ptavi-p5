@@ -154,7 +154,7 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
     
     Realizo una regla de 3 si: 
     0.02s ----> 64.000 bits
-    1s -------> x               x=64.000 bits por segundo = 64 Kbits por segundo       
+    1s -------> x               x = 64.000 bits por segundo = 64 Kbits por segundo       
 
 
 
@@ -162,18 +162,62 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 
 12. Vamos a ver más a fondo el intercambio RTP. En Telephony hay una opción RTP. Empecemos mirando los flujos RTP.
  ** ¿Cuántos flujos hay? ¿por qué?
+    Telephony -> RTP Streams. Puedo Observar 2 flujos de paquetes RTP
+    Miro los valores de Payload:
+    h261 Paquetes de Vídeo
+    g711A Paquetes de Audio
+ 
+ 
  ** ¿Cuántos paquetes se pierden?
+    Un 0% de los paquetes.
+    
+    
  ** ¿Cuál es el valor máximo del delta? ¿Y qué es lo que significa el valor de delta?
+    Para el flujo de Vídeo es 1290.479 ms y para el flujo de Audio es 1290.444 ms
+    Delta representa la diferencia de tiempo entre el paquete actual y el paquete anterior. Delta máximo es la mayor diferencia de tiempo.
+ 
  ** ¿Cuáles son los valores de jitter (medio y máximo)? ¿Qué quiere decir eso? ¿Estamos ante una conversación de calidad?
+    
+    Jitter medio:
+        Vídeo: 153.240 ms
+        Audio: 42.500 ms
+    
+    Jitter máximo:
+        Vídeo: 183.096 ms
+        Audio: 119.635 ms 
+        
+    La variación del retardo media de todos los paquetes de vídeo es de 153.24 ms y de audio 42.500ms
+    
+    El retardo máximo en los paquetes de Vídeo es de 183.096 ms y en los paquetes de audio 119.635 ms     
+    
+    No tenemos calidad en la conversación ya que estamos recibiendo paquetes tarde (miramos la gráfica) y no tiene buena pinta.
 
 
 13. Elige un paquete RTP de audio. Analiza el flujo de audio en Telephony -> RTP -> Stream Analysis.
+
+    Filtro por udp.port==5010
+    O selecciono para analizar solo el Audio
+
  ** ¿Cuánto valen el delta y el jitter para el primer paquete que ha llegado?
+    delta = 0 ms
+    jitter = 0 ms     
+    Si porque al ser el valor de delta y del jitter 0 quiere decir que no tienen un valor previo con el que comparar por eso estos paquetes serán los primeros.
+    
  ** ¿Podemos saber si éste es el primer paquete que nos han enviado?
+    Observamos que es el paquete 113. Es el primer paquete que nos llegó de RTP pero no de la captura.
+ 
  ** Los valores de jitter son menores de 10ms hasta un paquete dado. ¿Cuál?
+    Hasta el paquete 247
+ 
  ** ¿A qué se debe el cambio tan brusco del jitter?
+    El valor de delta aumento muchísimo y disminuye el ancho de banda(62.40->28.80).  
+  
  ** ¿Es comparable este cambio con el tiempo desde la recepción del paquete anterior? ¿Por qué?
+    Sabiendo que delta es la diferencia de tiempo de llegada entre el paquete anterior y el actual, esto implica un retardo mayor es decir el incremento del jitter porque ha tenido que esperar más ya que dispone de menos recursos para mandar sus datos.
+    
  ** ¿Cuál es la dependencia entre el tiempo transcurrido desde el paquete anterior y el valor de jitter?
+    Delta es la diferencia de tiempo de llegada entre el paquete anterior y el actual por lo tanto repercute en el jitter directamente ya que este es la variacion del retardo de los paquetes.
+ 
 
 
 14. En Telephony selecciona el menú VoIP calls. Verás que se lista la llamada de voz IP capturada en una ventana emergente. Selecciona esa llamada y pulsa el botón Graph.
@@ -214,7 +258,7 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 
 Captura de una sesión SIP
 
-Captura una sesión SIP de una conversación con el número SIP sip:9999@qxip.net. Tendrás que dar de alta una cuenta en www.ekiga.net con el navegador. Recuerda también que has de comenzar a capturar tramas antes de arrancar Ekiga para ver todo el proceso en el que participa SIP. Para realizar los siguientes ejercicios, deberás crearte una cuenta en ekiga.net y darte de alta la lanzar la aplicación.
+Captura una sesión SIP de una conversación con el número SIP sip:9999@qxip.net. sip:music@iptel.net Tendrás que dar de alta una cuenta en www.ekiga.net con el navegador. Recuerda también que has de comenzar a capturar tramas antes de arrancar Ekiga para ver todo el proceso en el que participa SIP. Para realizar los siguientes ejercicios, deberás crearte una cuenta en ekiga.net y darte de alta la lanzar la aplicación.
 
 17. Observa las diferencias en el inicio de la conversación entre el entorno del laboratorio y el del ejercicio anterior:
  ** ¿Es necesario el uso de DNS y STUN? ¿Por qué?
