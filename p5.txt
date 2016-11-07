@@ -141,16 +141,20 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
  
  ** ¿Cuál es el tamaño de paquete de los mismos?
     RTP = 214 bytes
-    
- 
- 
+     
  ** ¿Se utilizan bits de padding?
+    Podemos ver en los paquetes RTP Padding:False, es decir no se utilizan bits de relleno en el protocolo. 
  
  
  ** ¿Cuál es la periodicidad de los paquetes que se envían?
- 
+    Cada 0.024 s = 24 ms se manda un paquete RTP
  
  ** ¿Cuántos bits/segundo estamos enviando?
+    Para saber mi tamaño del paquete sin cabeceras pincho en RTP->Payload y me mostrará que tengo 160 bytes en cada paquete. Paso los bytes a bits multiplicando 160*8 = 1280 bits
+    
+    Realizo una regla de 3 si: 
+    0.02s ----> 64.000 bits
+    1s -------> x               x=64.000 bits por segundo = 64 Kbits por segundo       
 
 
 
