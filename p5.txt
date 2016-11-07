@@ -164,8 +164,9 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
  ** ¿Cuántos flujos hay? ¿por qué?
     Telephony -> RTP Streams. Puedo Observar 2 flujos de paquetes RTP
     Miro los valores de Payload:
-    h261 Paquetes de Vídeo
-    g711A Paquetes de Audio
+    
+    h261 Paquetes de Vídeo 5014
+    g711A Paquetes de Audio 5010
  
  
  ** ¿Cuántos paquetes se pierden?
@@ -222,7 +223,10 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
 
 14. En Telephony selecciona el menú VoIP calls. Verás que se lista la llamada de voz IP capturada en una ventana emergente. Selecciona esa llamada y pulsa el botón Graph.
  ** ¿Cuánto dura la conversación?
+    38-17 = 21 s aproximadamente
+ 
  ** ¿Cuáles son sus SSRC? ¿Por qué hay varios SSRCs? ¿Hay CSRCs?
+    Audio SSRC = 0xbf4afd37, Video SSRC = 0x43306582 // Uno para el audio y otro para el vídeo // No
 
 
 15. Identifica la trama donde se finaliza la conversación.
