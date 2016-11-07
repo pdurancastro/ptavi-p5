@@ -184,8 +184,8 @@ Se ha capturado una sesión SIP (archivo sip.cap.gz), que se puede abrir con Wir
         Audio: 42.500 ms
     
     Jitter máximo:
-        Vídeo: 183.096 ms
-        Audio: 119.635 ms 
+        Vídeo: 183.096 
+        Audio: 119.635  
         
     La variación del retardo media de todos los paquetes de vídeo es de 153.24 ms y de audio 42.500ms
     
@@ -266,16 +266,32 @@ Captura una sesión SIP de una conversación con el número SIP sip:9999@qxip.ne
 
 17. Observa las diferencias en el inicio de la conversación entre el entorno del laboratorio y el del ejercicio anterior:
  ** ¿Es necesario el uso de DNS y STUN? ¿Por qué?
+    DNS si pero STUN no porque no estamos utilizando un NAT, mi IP del laboratorio es pública.
+ 
  ** ¿Son diferentes el registro y la descripción de la sesión?
+    No, puedo observar que la petición REGISTER es muy similar a la de la captura proporcionada.
+ 
 
 
 18. Identifica las diferencias existentes entre esta conversación y la conversación anterior:
  ** ¿Cuántos flujos tenemos?
+    Telephony-> RTP-> Me da los flujos en este caso 2
+ 
  ** ¿Cuál es su periodicidad?
+    Mi periodicidad deberia ser aproximada a la delta de cada flujo
+    212.128.254.138 / pto 5062 -> 30ms 
+    212.79.111.155 / pto 15038 -> 38ms
+    
  ** ¿Cuánto es el valor máximo del delta y los valores medios y máximo del jitter?
+    212.128.254.138 / pto 5062 -> Max Delta(ms) = 30.544 ms / Max Jitter = 4.236 / Mean Jitter = 3.291
+    212.79.111.155 / pto 15038 -> Max Delta(ms) = 38.756 ms / Max Jitter = 4.589 / Mean Jitter = 0.725
+    
+    
  ** ¿Podrías reproducir la conversación desde Wireshark? ¿Cómo? Comprueba que poniendo un valor demasiado pequeño para el buffer de jitter, la conversación puede no tener la calidad necesaria.
+    Deberia mediante Telephony VoIp calls Seleccionamos y Play Streams.
+ 
  ** ¿Sabrías decir qué tipo de servicio ofrece sip:9999@qxip.net?
-
+    Servicio de Audio
 
 
 [Al terminar el ejercicio es recomendable hacer commit de los ficheros modificados]
